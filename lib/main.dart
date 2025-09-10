@@ -1,3 +1,4 @@
+import 'package:aqualert/screens/alerts_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -44,6 +45,8 @@ class AqualertApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
         '/main': (context) => const MainNavigation(),
+        '/alerts': (context) => const AlertScreen(),
+        '/profile': (context) => const ProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
@@ -101,6 +104,7 @@ class _MainNavigationState extends State<MainNavigation> {
   final List<Widget> _screens = const [
     CameraScreen(),
     MapScreen(),
+    AlertScreen(),
     ProfileScreen(),
   ];
 
@@ -117,11 +121,17 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        backgroundColor: Color.fromARGB(255, 143, 193, 205),
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue[900],
+        unselectedItemColor: Colors.black87,
+        showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.upload_rounded),
             label: 'Report',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Alerts'),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],

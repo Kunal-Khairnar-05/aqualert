@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../services/cloudinary_service.dart';
 import '../services/user_service.dart'; // Import the UserService
-import 'package:geolocator/geolocator.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,6 +12,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String? _location;
+  double? _latitude;
+  double? _longitude;
   String? _name;
   String? _email;
   String? _phone;
@@ -28,10 +30,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isUploadingImage = false;
   bool _isFetching = false;
 
-  String? _location;
-  double? _latitude;
-  double? _longitude;
-
   @override
   void initState() {
     super.initState();
@@ -40,14 +38,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _loadUserProfile() async {
     setState(() => _isFetching = true);
-    
     try {
       // Initialize UserService
       await _userService.initialize();
-      
       // Get user profile (cache-first strategy)
       final userProfile = await _userService.getUserProfile();
-      
       if (userProfile != null) {
         setState(() {
           _name = userProfile['name'];
@@ -80,11 +75,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _refreshProfile() async {
     setState(() => _isFetching = true);
-    
     try {
       // Force refresh from Firebase
       final userProfile = await _userService.getUserProfile(forceRefresh: true);
-      
       if (userProfile != null) {
         setState(() {
           _name = userProfile['name'];
@@ -93,6 +86,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _age = userProfile['age'];
           _role = userProfile['role'];
           _profileImageUrl = userProfile['profileImageUrl'];
+          _location = userProfile['location'];
+          _latitude =
+              userProfile['latitude'] is double
+                  ? userProfile['latitude']
+                  : (userProfile['latitude'] is num
+                      ? (userProfile['latitude'] as num).toDouble()
+                      : null);
+          _longitude =
+              userProfile['longitude'] is double
+                  ? userProfile['longitude']
+                  : (userProfile['longitude'] is num
+                      ? (userProfile['longitude'] as num).toDouble()
+                      : null);
         });
       }
     } catch (e) {
@@ -305,7 +311,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: const Text('Profile'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.delete_sweep),
             tooltip: 'Logout',
             onPressed: _logout,
           ),
