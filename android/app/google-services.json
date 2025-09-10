@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "309521282234",
+    "project_id": "aqualert-af4f4",
+    "storage_bucket": "aqualert-af4f4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309521282234:android:d85aa75a6ad15bf6177e83",
+        "android_client_info": {
+          "package_name": "com.example.aqualert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuD11JTjnmYKRpg41bZ42n95ii_i9o-p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
