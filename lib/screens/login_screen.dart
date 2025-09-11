@@ -155,31 +155,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             ),
                           ],
                         ),
-                        child: AnimatedBuilder(
-                          animation: _waveAnimation,
-                          builder: (context, child) {
-                            return Transform.scale(
-                              scale: 1.0 + (_waveAnimation.value * 0.05),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      Colors.blue.shade400,
-                                      Colors.blue.shade600,
-                                      Colors.blue.shade800,
-                                    ],
-                                  ),
-                                ),
-                                child: const Icon(
-                                  Icons.waves,
-                                  size: 60,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                        child: Image.asset( 'assets/images/aqualert_without_bg.png' ),
                       ),
                       const SizedBox(height: 24),
                       
