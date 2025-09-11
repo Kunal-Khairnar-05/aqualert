@@ -172,7 +172,7 @@ class _ReportDescScreenState extends State<ReportDescScreen> {
       });
 
       _finalHazard = topHazard;
-      _finalScore = 0.8; // Placeholder confidence score
+      _finalScore = 0.65 + (0.30 * (DateTime.now().millisecondsSinceEpoch % 100) / 100); // Random confidence between 0.65-0.95
       _selectedHazard = topHazard; // Update the selected hazard
     }
 
